@@ -1,0 +1,627 @@
+/* Archipelago Marine Cadence — Deep Oceanic Cartography & Data UI
+   Color System: Deep Trench Navy (#04070b), Abyssal Indigo (#08111d), Bioluminescent Cyan (#00f2fe), Neon Emerald (#38ef7d) */
+
+:root {
+  --bg-deep: #05090f;
+  --bg-surface: #0a111c;
+  --bg-panel: #0d1624;
+  --bg-card: rgba(16, 26, 42, 0.85);
+
+  --border-ocean: rgba(0, 242, 254, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+
+  --text-pure: #ffffff;
+  --text-main: #e2e8f0;
+  --text-muted: #7b8ea5;
+
+  --cyan-bright: #00f2fe;
+  --cyan-glow: rgba(0, 242, 254, 0.35);
+  --emerald-bio: #38ef7d;
+  --coral-warm: #ff7675;
+  --amber-alert: #f59e0b;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.ocean-header {
+  background: rgba(5, 9, 15, 0.95);
+  border-bottom: 1px solid var(--border-ocean);
+  backdrop-filter: blur(12px);
+  padding: 12px 28px;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sonar-indicator {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sonar-core {
+  width: 8px;
+  height: 8px;
+  background: var(--cyan-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--cyan-bright);
+}
+
+.sonar-ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid var(--cyan-bright);
+  animation: pingSonar 2s infinite cubic-bezier(0, 0.2, 0.8, 1);
+}
+
+@keyframes pingSonar {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-kicker {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--cyan-bright);
+}
+
+.brand-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text-pure);
+}
+
+.telemetry-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(0, 242, 254, 0.04);
+  border: 1px solid var(--border-ocean);
+  padding: 6px 18px;
+  border-radius: 30px;
+}
+
+.tele-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.tele-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tele-val {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tele-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-subtle);
+}
+
+.text-cyan { color: var(--cyan-bright); }
+.text-emerald { color: var(--emerald-bio); }
+
+/* Main Split Viewport */
+.atlas-shell {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  height: calc(100vh - 58px);
+  overflow: hidden;
+}
+
+/* Left: Map Viewport */
+.map-viewport-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #04070b;
+  overflow: hidden;
+}
+
+/* Taxon Carousel */
+.species-carousel {
+  padding: 12px 20px;
+  background: rgba(10, 17, 28, 0.85);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.species-carousel::-webkit-scrollbar { display: none; }
+
+.carousel-track {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.taxon-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.taxon-chip:hover {
+  background: rgba(0, 242, 254, 0.08);
+  color: var(--text-pure);
+  border-color: rgba(0, 242, 254, 0.3);
+}
+
+.taxon-chip.active {
+  background: var(--cyan-bright);
+  color: #03080e;
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 14px var(--cyan-glow);
+}
+
+/* Map SVG Stage */
+.map-stage {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.archipelago-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.island-landmass {
+  fill: #14243b;
+  stroke: #1f3757;
+  stroke-width: 1.5;
+  transition: fill 0.3s;
+}
+
+.island-landmass:hover {
+  fill: #1b314e;
+}
+
+/* Ocean Current animations */
+.current-flow {
+  animation: currentDash 24s linear infinite;
+  opacity: 0.65;
+}
+
+@keyframes currentDash {
+  to { stroke-dashoffset: -200; }
+}
+
+/* Interactive Marine Nodes */
+.marine-node {
+  cursor: pointer;
+}
+
+.sonar-beacon {
+  fill: none;
+  stroke: var(--cyan-bright);
+  stroke-width: 1.5;
+  opacity: 0.3;
+  animation: pulseBeacon 2.5s infinite ease-out;
+}
+
+@keyframes pulseBeacon {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.core-point {
+  transition: all 0.2s ease;
+}
+
+.point-coral { fill: var(--coral-warm); }
+.point-cdo { fill: var(--cyan-bright); filter: drop-shadow(0 0 8px var(--cyan-bright)); }
+.point-pelagic { fill: var(--emerald-bio); }
+.point-trench { fill: #c084fc; }
+
+.marine-node:hover .core-point {
+  transform: scale(1.4);
+}
+
+.node-caption {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.marine-node:hover .node-caption, .marine-node.active .node-caption {
+  fill: var(--text-pure);
+  font-weight: 700;
+}
+
+.highlight-cdo {
+  fill: var(--cyan-bright) !important;
+  font-weight: 700;
+}
+
+/* HUD Overlay */
+.map-hud-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.hud-pill {
+  background: rgba(10, 17, 28, 0.85);
+  border: 1px solid var(--border-ocean);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--emerald-bio);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--emerald-bio);
+}
+
+.hud-btn {
+  background: rgba(10, 17, 28, 0.85);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hud-btn:hover {
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--cyan-bright);
+}
+
+/* Right: Sanctuary Dossier */
+.sanctuary-dossier {
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-ocean);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+}
+
+.dossier-scroll {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dossier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 20px;
+}
+
+.badge-status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cyan-bright);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.dossier-meta h2 {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-pure);
+  margin-bottom: 6px;
+}
+
+.dossier-subhead {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.health-index-badge {
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid var(--border-ocean);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  min-width: 95px;
+}
+
+.index-num {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--cyan-bright);
+  display: block;
+  line-height: 1;
+}
+
+.index-lbl {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Dossier Grid Metrics */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dossier-metric {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.m-val {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-pure);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.m-lbl {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Thermal Simulator */
+.thermal-simulator-card {
+  background: rgba(0, 242, 254, 0.03);
+  border: 1px solid var(--border-ocean);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sim-header h4 {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sim-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: rgba(56, 239, 125, 0.15);
+  color: var(--emerald-bio);
+}
+
+.sim-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cyan-bright);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--cyan-bright);
+}
+
+.slider-val {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan-bright);
+  min-width: 90px;
+  text-align: right;
+}
+
+.stress-meter-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stress-fill {
+  height: 100%;
+  transition: width 0.25s, background-color 0.25s;
+}
+
+.stress-readout {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Species Catalog */
+.species-catalog h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cyan-bright);
+}
+
+.species-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.species-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.species-symbol {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--cyan-bright);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.species-details h5 {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.species-details span {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Conservation Box */
+.conservation-box {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--emerald-bio);
+  padding: 14px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.conservation-box h5 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--emerald-bio);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.conservation-box p {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .atlas-shell {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .sanctuary-dossier {
+    height: 600px;
+    border-left: none;
+    border-top: 1px solid var(--border-ocean);
+  }
+}
