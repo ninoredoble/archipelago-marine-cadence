@@ -1,5 +1,4 @@
-/* Archipelago Marine Cadence — Deep Oceanic Cartography & Data UI
-   Color System: Deep Trench Navy (#04070b), Abyssal Indigo (#08111d), Bioluminescent Cyan (#00f2fe), Neon Emerald (#38ef7d) */
+/* Archipelago Marine Cadence — Oceanographic Cartography & Data UI */
 
 :root {
   --bg-deep: #05090f;
@@ -7,12 +6,12 @@
   --bg-panel: #0d1624;
   --bg-card: rgba(16, 26, 42, 0.85);
 
-  --border-ocean: rgba(0, 242, 254, 0.15);
-  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-ocean: rgba(0, 242, 254, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.08);
 
   --text-pure: #ffffff;
   --text-main: #e2e8f0;
-  --text-muted: #7b8ea5;
+  --text-muted: #8494a7;
 
   --cyan-bright: #00f2fe;
   --cyan-glow: rgba(0, 242, 254, 0.35);
@@ -47,9 +46,8 @@ body {
 
 /* Header */
 .ocean-header {
-  background: rgba(5, 9, 15, 0.95);
+  background: rgba(5, 9, 15, 0.98);
   border-bottom: 1px solid var(--border-ocean);
-  backdrop-filter: blur(12px);
   padding: 12px 28px;
   z-index: 50;
   flex-shrink: 0;
@@ -122,7 +120,7 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-  background: rgba(0, 242, 254, 0.04);
+  background: rgba(0, 242, 254, 0.05);
   border: 1px solid var(--border-ocean);
   padding: 6px 18px;
   border-radius: 30px;
@@ -159,7 +157,7 @@ body {
 .atlas-shell {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 480px;
+  grid-template-columns: 1fr 490px;
   height: calc(100vh - 58px);
   overflow: hidden;
 }
@@ -171,41 +169,55 @@ body {
   position: relative;
   background: #04070b;
   overflow: hidden;
+  height: 100%;
 }
 
-/* Taxon Carousel */
+/* Taxon Carousel - Fixed clipping and styling */
 .species-carousel {
   padding: 12px 20px;
-  background: rgba(10, 17, 28, 0.85);
+  background: rgba(10, 17, 28, 0.95);
   border-bottom: 1px solid var(--border-subtle);
   overflow-x: auto;
   white-space: nowrap;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 242, 254, 0.3) transparent;
+  flex-shrink: 0;
+  z-index: 20;
 }
 
-.species-carousel::-webkit-scrollbar { display: none; }
+.species-carousel::-webkit-scrollbar {
+  height: 4px;
+}
+
+.species-carousel::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 254, 0.3);
+  border-radius: 2px;
+}
 
 .carousel-track {
   display: inline-flex;
   gap: 10px;
+  align-items: center;
 }
 
 .taxon-chip {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-subtle);
-  color: var(--text-muted);
-  padding: 6px 14px;
+  color: #94a3b8;
+  padding: 8px 16px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .taxon-chip:hover {
-  background: rgba(0, 242, 254, 0.08);
+  background: rgba(0, 242, 254, 0.12);
   color: var(--text-pure);
-  border-color: rgba(0, 242, 254, 0.3);
+  border-color: rgba(0, 242, 254, 0.4);
 }
 
 .taxon-chip.active {
@@ -213,6 +225,7 @@ body {
   color: #03080e;
   border-color: var(--cyan-bright);
   box-shadow: 0 0 14px var(--cyan-glow);
+  font-weight: 700;
 }
 
 /* Map SVG Stage */
@@ -222,23 +235,34 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .archipelago-svg {
   width: 100%;
   height: 100%;
+  max-height: 100%;
   display: block;
 }
 
 .island-landmass {
-  fill: #14243b;
-  stroke: #1f3757;
+  fill: #132238;
+  stroke: #223c5e;
   stroke-width: 1.5;
   transition: fill 0.3s;
 }
 
 .island-landmass:hover {
-  fill: #1b314e;
+  fill: #1a3254;
+}
+
+.province-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  fill: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
 }
 
 /* Ocean Current animations */
@@ -278,27 +302,40 @@ body {
 .point-pelagic { fill: var(--emerald-bio); }
 .point-trench { fill: #c084fc; }
 
-.marine-node:hover .core-point {
-  transform: scale(1.4);
+.marine-node:hover .core-point, .marine-node.active .core-point {
+  r: 9;
+}
+
+/* Node Badges & Non-overlapping Callouts */
+.node-bubble {
+  fill: rgba(7, 14, 24, 0.88);
+  stroke: rgba(0, 242, 254, 0.25);
+  stroke-width: 1;
+  rx: 4;
+  transition: all 0.2s;
+}
+
+.marine-node:hover .node-bubble, .marine-node.active .node-bubble {
+  fill: rgba(0, 242, 254, 0.15);
+  stroke: var(--cyan-bright);
 }
 
 .node-caption {
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
-  fill: var(--text-muted);
+  fill: #cbd5e1;
   pointer-events: none;
-  transition: all 0.2s;
 }
 
 .marine-node:hover .node-caption, .marine-node.active .node-caption {
-  fill: var(--text-pure);
+  fill: #ffffff;
   font-weight: 700;
 }
 
 .highlight-cdo {
   fill: var(--cyan-bright) !important;
-  font-weight: 700;
+  font-weight: 800 !important;
 }
 
 /* HUD Overlay */
@@ -308,10 +345,11 @@ body {
   left: 20px;
   display: flex;
   gap: 12px;
+  z-index: 15;
 }
 
 .hud-pill {
-  background: rgba(10, 17, 28, 0.85);
+  background: rgba(10, 17, 28, 0.9);
   border: 1px solid var(--border-ocean);
   padding: 6px 12px;
   border-radius: var(--radius-sm);
@@ -332,7 +370,7 @@ body {
 }
 
 .hud-btn {
-  background: rgba(10, 17, 28, 0.85);
+  background: rgba(10, 17, 28, 0.9);
   border: 1px solid var(--border-subtle);
   color: var(--text-main);
   padding: 6px 12px;
@@ -356,6 +394,7 @@ body {
   flex-direction: column;
   overflow-y: auto;
   position: relative;
+  height: 100%;
 }
 
 .dossier-scroll {
@@ -618,9 +657,13 @@ input[type=range]::-webkit-slider-thumb {
   .atlas-shell {
     grid-template-columns: 1fr;
     height: auto;
+    overflow-y: auto;
+  }
+  .map-viewport-container {
+    height: 520px;
   }
   .sanctuary-dossier {
-    height: 600px;
+    height: auto;
     border-left: none;
     border-top: 1px solid var(--border-ocean);
   }

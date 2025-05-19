@@ -54,134 +54,162 @@
       <!-- Top Species / Sanctuary Carousel (Dino-Draft Style) -->
       <div class="species-carousel">
         <div class="carousel-track" id="carouselTrack">
-          <button class="taxon-chip active" onclick="focusSanctuary('tubbataha', this)">Tubbataha Reefs</button>
+          <button class="taxon-chip" onclick="focusSanctuary('tubbataha', this)">Tubbataha Reefs</button>
           <button class="taxon-chip" onclick="focusSanctuary('apo-reef', this)">Apo Reef Marine Park</button>
-          <button class="taxon-chip" onclick="focusSanctuary('macajalar', this)">Macajalar Bay Sanctuary (CDO)</button>
-          <button class="taxon-chip" onclick="focusSanctuary('camiguin', this)">Camiguin Black Coral Forest</button>
-          <button class="taxon-chip" onclick="focusSanctuary('taon', this)">Tañon Strait Protected Seascape</button>
+          <button class="taxon-chip active" onclick="focusSanctuary('macajalar', this)">Macajalar Bay (CDO)</button>
+          <button class="taxon-chip" onclick="focusSanctuary('camiguin', this)">Camiguin Black Coral</button>
+          <button class="taxon-chip" onclick="focusSanctuary('taon', this)">Tañon Strait Seascape</button>
           <button class="taxon-chip" onclick="focusSanctuary('coron', this)">Coron Island Biosphere</button>
-          <button class="taxon-chip" onclick="focusSanctuary('malapascua', this)">Monad Shoal Thresher Sanctuary</button>
+          <button class="taxon-chip" onclick="focusSanctuary('malapascua', this)">Monad Shoal Thresher</button>
           <button class="taxon-chip" onclick="focusSanctuary('siargao', this)">Siargao Pelagic Deep</button>
         </div>
       </div>
 
-      <!-- Ocean SVG Map -->
+      <!-- Ocean SVG Map (Geographically Proportional) -->
       <div class="map-stage">
-        <svg id="archipelagoSvg" viewBox="0 0 880 720" class="archipelago-svg" xmlns="http://www.w3.org/2000/svg">
+        <svg id="archipelagoSvg" viewBox="0 0 920 840" class="archipelago-svg" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <!-- Water Depth Gradient -->
             <radialGradient id="deepOceanGrad" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stop-color="#0e1e32"/>
-              <stop offset="60%" stop-color="#08111d"/>
-              <stop offset="100%" stop-color="#04070b"/>
+              <stop offset="0%" stop-color="#0e1f36"/>
+              <stop offset="60%" stop-color="#081321"/>
+              <stop offset="100%" stop-color="#04080e"/>
             </radialGradient>
 
             <!-- Trench Glow Gradient -->
             <linearGradient id="trenchGrad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.05"/>
-              <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.3"/>
+              <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.35"/>
               <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.05"/>
             </linearGradient>
 
-            <filter id="sonarGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="6" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            <!-- Shadow for labels -->
+            <filter id="badgeShadow" x="-10%" y="-20%" width="120%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.6"/>
             </filter>
           </defs>
 
           <!-- Deep Ocean Background with Bathymetric Graticule -->
-          <rect width="880" height="720" fill="url(#deepOceanGrad)" />
+          <rect width="920" height="840" fill="url(#deepOceanGrad)" />
 
           <!-- Bathymetric Lat/Long Grid -->
-          <g stroke="rgba(255, 255, 255, 0.04)" stroke-width="1" stroke-dasharray="4 8">
-            <line x1="80" y1="0" x2="80" y2="720"/>
-            <line x1="280" y1="0" x2="280" y2="720"/>
-            <line x1="480" y1="0" x2="480" y2="720"/>
-            <line x1="680" y1="0" x2="680" y2="720"/>
-            <line x1="0" y1="180" x2="880" y2="180"/>
-            <line x1="0" y1="360" x2="880" y2="360"/>
-            <line x1="0" y1="540" x2="880" y2="540"/>
+          <g stroke="rgba(0, 242, 254, 0.05)" stroke-width="1" stroke-dasharray="4 8">
+            <line x1="120" y1="0" x2="120" y2="840"/>
+            <line x1="320" y1="0" x2="320" y2="840"/>
+            <line x1="520" y1="0" x2="520" y2="840"/>
+            <line x1="720" y1="0" x2="720" y2="840"/>
+            <line x1="0" y1="140" x2="920" y2="140"/>
+            <line x1="0" y1="320" x2="920" y2="320"/>
+            <line x1="0" y1="500" x2="920" y2="500"/>
+            <line x1="0" y1="680" x2="920" y2="680"/>
           </g>
 
-          <!-- Philippine Trench Abyss Line -->
-          <path d="M 680,120 Q 640,340 690,520 T 730,680" fill="none" stroke="url(#trenchGrad)" stroke-width="28" stroke-linecap="round"/>
-          <path d="M 680,120 Q 640,340 690,520 T 730,680" fill="none" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.6"/>
-          <text x="695" y="320" fill="#00f2fe" opacity="0.35" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="3" transform="rotate(78 695 320)">PHILIPPINE TRENCH (10,540M DEEP)</text>
+          <!-- Philippine Trench Abyss Line (Eastern Seaboard) -->
+          <path d="M 760,160 Q 720,420 770,620 T 820,800" fill="none" stroke="url(#trenchGrad)" stroke-width="32" stroke-linecap="round"/>
+          <path d="M 760,160 Q 720,420 770,620 T 820,800" fill="none" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.7"/>
+          <text x="770" y="380" fill="#00f2fe" opacity="0.4" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="3" transform="rotate(78 770 380)">PHILIPPINE TRENCH (10,540M DEEP)</text>
 
-          <!-- Stylized Philippine Islands Outlines (Luzon, Visayas, Mindanao, Palawan) -->
-          <!-- Palawan Arc -->
-          <path class="island-landmass" d="M 220,380 L 140,510 L 155,525 L 245,395 Z" />
-          
-          <!-- Luzon Mass -->
-          <path class="island-landmass" d="M 360,110 L 410,130 L 450,220 L 410,290 L 370,270 L 340,220 L 330,150 Z" />
-          
-          <!-- Visayas Archipelago (Cebu, Bohol, Leyte, Panay, Negros) -->
-          <path class="island-landmass" d="M 380,360 L 440,340 L 480,360 L 470,410 L 420,430 L 370,400 Z" />
-          <path class="island-landmass" d="M 490,340 L 530,350 L 520,430 L 480,410 Z" />
+          <!-- Stylized Philippine Islands Outlines (Detailed Natural Shapes) -->
+          <!-- 1. Palawan Corridor -->
+          <path class="island-landmass" d="M 280,420 L 255,450 L 175,555 L 140,600 L 155,615 L 205,570 L 290,460 L 305,430 Z" />
+          <text x="185" y="540" class="province-label">PALAWAN</text>
 
-          <!-- Mindanao Mainland -->
-          <path class="island-landmass" d="M 440,490 L 560,470 L 610,520 L 590,640 L 490,650 L 420,590 L 370,550 L 400,510 Z" />
+          <!-- 2. Luzon Mainland -->
+          <path class="island-landmass" d="M 410,70 L 450,90 L 485,150 L 465,220 L 490,260 L 535,285 L 515,310 L 460,270 L 420,290 L 395,240 L 375,150 L 390,95 Z" />
+          <text x="425" y="170" class="province-label">LUZON</text>
 
-          <!-- Kuroshio / Pelagic Currents (Animated Paths) -->
-          <path class="current-flow" d="M 720,660 Q 610,480 620,310 T 640,90" fill="none" stroke="#00f2fe" stroke-width="2" stroke-dasharray="8 12"/>
-          <path class="current-flow" d="M 260,620 Q 340,480 370,390 T 400,240" fill="none" stroke="#38ef7d" stroke-width="1.5" stroke-dasharray="6 10"/>
+          <!-- 3. Mindoro Island -->
+          <path class="island-landmass" d="M 370,305 L 415,310 L 430,355 L 395,375 L 360,340 Z" />
 
-          <!-- Interactive Marine Nodes -->
-          
-          <!-- 1. Tubbataha -->
+          <!-- 4. Visayas Islands (Panay, Negros, Cebu, Bohol, Leyte, Samar) -->
+          <!-- Panay & Negros -->
+          <path class="island-landmass" d="M 390,410 L 430,400 L 445,435 L 425,475 L 395,465 Z" />
+          <path class="island-landmass" d="M 430,445 L 455,440 L 460,510 L 435,525 L 425,480 Z" />
+          <!-- Cebu & Bohol -->
+          <path class="island-landmass" d="M 465,425 L 485,420 L 480,490 L 465,495 Z" />
+          <path class="island-landmass" d="M 495,475 L 530,465 L 540,495 L 505,510 Z" />
+          <!-- Samar & Leyte -->
+          <path class="island-landmass" d="M 545,340 L 585,355 L 570,415 L 540,400 Z" />
+          <path class="island-landmass" d="M 535,405 L 565,420 L 555,485 L 525,465 Z" />
+          <text x="475" y="395" class="province-label">VISAYAS</text>
+
+          <!-- 5. Mindanao Mainland (Proper southern placement) -->
+          <path class="island-landmass" d="M 465,580 L 550,560 L 610,575 L 685,580 L 710,640 L 690,720 L 640,750 L 580,740 L 520,725 L 480,685 L 440,650 L 420,605 L 445,595 Z" />
+          <!-- Zamboanga Peninsula -->
+          <path class="island-landmass" d="M 430,600 L 375,615 L 335,630 L 350,650 L 395,645 L 425,625 Z" />
+          <text x="560" y="670" class="province-label">MINDANAO</text>
+
+          <!-- Kuroshio & Pelagic Oceanic Currents (Animated) -->
+          <path class="current-flow" d="M 800,780 Q 700,560 690,380 T 730,120" fill="none" stroke="#00f2fe" stroke-width="2" stroke-dasharray="8 12"/>
+          <path class="current-flow" d="M 320,720 Q 380,560 410,480 T 440,320" fill="none" stroke="#38ef7d" stroke-width="1.5" stroke-dasharray="6 10"/>
+
+          <!-- ============================================== -->
+          <!-- INTERACTIVE MARINE NODES WITH CALLOUT BADGES  -->
+          <!-- ============================================== -->
+
+          <!-- 1. Tubbataha Atolls (Sulu Sea) -->
           <g class="marine-node" id="node-tubbataha" onclick="selectSanctuary('tubbataha')">
-            <circle cx="280" cy="460" r="22" class="sonar-beacon beacon-tubbataha" />
-            <circle cx="280" cy="460" r="7" class="core-point point-coral" />
-            <text x="295" y="464" class="node-caption">Tubbataha Atolls (UNESCO)</text>
+            <circle cx="295" cy="540" r="22" class="sonar-beacon" />
+            <circle cx="295" cy="540" r="7" class="core-point point-coral" />
+            <rect x="200" y="555" width="165" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="210" y="571" class="node-caption">Tubbataha Reefs (UNESCO)</text>
           </g>
 
-          <!-- 2. Apo Reef -->
+          <!-- 2. Apo Reef (Mindoro Strait) -->
           <g class="marine-node" id="node-apo-reef" onclick="selectSanctuary('apo-reef')">
-            <circle cx="310" cy="290" r="18" class="sonar-beacon" />
-            <circle cx="310" cy="290" r="6" class="core-point point-coral" />
-            <text x="325" y="294" class="node-caption">Apo Reef Atoll</text>
+            <circle cx="340" cy="330" r="20" class="sonar-beacon" />
+            <circle cx="340" cy="330" r="7" class="core-point point-coral" />
+            <rect x="235" y="305" width="130" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="245" y="321" class="node-caption">Apo Reef Atoll</text>
           </g>
 
-          <!-- 3. Macajalar Bay Sanctuary (CDO) -->
+          <!-- 3. Macajalar Bay Sanctuary (Cagayan de Oro - Primary Highlight) -->
           <g class="marine-node active" id="node-macajalar" onclick="selectSanctuary('macajalar')">
-            <circle cx="490" cy="485" r="24" class="sonar-beacon beacon-focus" />
-            <circle cx="490" cy="485" r="7" class="core-point point-cdo" />
-            <text x="510" y="489" class="node-caption highlight-cdo">Macajalar Bay Reefs (CDO)</text>
+            <circle cx="535" cy="570" r="28" class="sonar-beacon" />
+            <circle cx="535" cy="570" r="8" class="core-point point-cdo" />
+            <!-- Distinct Callout Box -->
+            <rect x="525" y="595" width="190" height="26" class="node-bubble" filter="url(#badgeShadow)" style="stroke: #00f2fe; stroke-width: 1.5;"/>
+            <text x="535" y="612" class="node-caption highlight-cdo">★ Macajalar Bay Reefs (CDO)</text>
           </g>
 
-          <!-- 4. Camiguin Black Coral -->
+          <!-- 4. Camiguin Black Coral Forest (North of CDO) -->
           <g class="marine-node" id="node-camiguin" onclick="selectSanctuary('camiguin')">
-            <circle cx="530" cy="460" r="16" class="sonar-beacon" />
-            <circle cx="530" cy="460" r="5" class="core-point point-pelagic" />
-            <text x="545" y="464" class="node-caption">Camiguin Marine Sanctuary</text>
+            <circle cx="550" cy="530" r="18" class="sonar-beacon" />
+            <circle cx="550" cy="530" r="6" class="core-point point-pelagic" />
+            <rect x="565" y="520" width="145" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="575" y="536" class="node-caption">Camiguin Black Coral</text>
           </g>
 
-          <!-- 5. Tañon Strait -->
+          <!-- 5. Tañon Strait (Between Cebu & Negros) -->
           <g class="marine-node" id="node-taon" onclick="selectSanctuary('taon')">
-            <circle cx="430" cy="410" r="18" class="sonar-beacon" />
-            <circle cx="430" cy="410" r="6" class="core-point point-pelagic" />
-            <text x="330" y="414" class="node-caption">Tañon Dolphin Seascape</text>
+            <circle cx="450" cy="465" r="18" class="sonar-beacon" />
+            <circle cx="450" cy="465" r="6" class="core-point point-pelagic" />
+            <rect x="315" y="475" width="150" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="325" y="491" class="node-caption">Tañon Dolphin Seascape</text>
           </g>
 
-          <!-- 6. Monad Shoal -->
+          <!-- 6. Monad Shoal (Northern Cebu) -->
           <g class="marine-node" id="node-malapascua" onclick="selectSanctuary('malapascua')">
-            <circle cx="465" cy="335" r="16" class="sonar-beacon" />
-            <circle cx="465" cy="335" r="5" class="core-point point-pelagic" />
-            <text x="480" y="339" class="node-caption">Monad Shoal (Thresher)</text>
+            <circle cx="485" cy="385" r="18" class="sonar-beacon" />
+            <circle cx="485" cy="385" r="6" class="core-point point-pelagic" />
+            <rect x="500" y="375" width="160" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="510" y="391" class="node-caption">Monad Shoal (Thresher)</text>
           </g>
 
-          <!-- 7. Coron Island -->
+          <!-- 7. Coron Island (Northern Palawan) -->
           <g class="marine-node" id="node-coron" onclick="selectSanctuary('coron')">
-            <circle cx="260" cy="310" r="16" class="sonar-beacon" />
-            <circle cx="260" cy="310" r="5" class="core-point point-coral" />
-            <text x="175" y="314" class="node-caption">Coron Biosphere</text>
+            <circle cx="310" cy="370" r="18" class="sonar-beacon" />
+            <circle cx="310" cy="370" r="6" class="core-point point-coral" />
+            <rect x="185" y="360" width="145" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="195" y="376" class="node-caption">Coron Biosphere</text>
           </g>
 
-          <!-- 8. Siargao Deep -->
+          <!-- 8. Siargao Pelagic Shelf (Eastern Seaboard fronting Trench) -->
           <g class="marine-node" id="node-siargao" onclick="selectSanctuary('siargao')">
-            <circle cx="585" cy="465" r="18" class="sonar-beacon" />
-            <circle cx="585" cy="465" r="6" class="core-point point-trench" />
-            <text x="600" y="469" class="node-caption">Siargao Pelagic Shelf</text>
+            <circle cx="675" cy="545" r="18" class="sonar-beacon" />
+            <circle cx="675" cy="545" r="6" class="core-point point-trench" />
+            <rect x="690" y="535" width="155" height="24" class="node-bubble" filter="url(#badgeShadow)"/>
+            <text x="700" y="551" class="node-caption">Siargao Pelagic Shelf</text>
           </g>
 
         </svg>
@@ -193,7 +221,7 @@
             <span>Sensor Buoys: 124 Streaming</span>
           </div>
           <div class="hud-zoom-controls">
-            <button class="hud-btn" onclick="resetMapView()">⟲ Reset View</button>
+            <button class="hud-btn" onclick="resetMapView()">⟲ Reset CDO Anchor</button>
           </div>
         </div>
       </div>
@@ -206,7 +234,7 @@
       <div class="dossier-scroll">
         <div class="dossier-header">
           <div class="dossier-meta">
-            <span class="badge-status" id="dossierTier">NATIONAL MARINE PROTECTED AREA &bull; TIER 1</span>
+            <span class="badge-status" id="dossierTier">NORTHERN MINDANAO PRIORITY SANCTUARY &bull; TIER 1</span>
             <h2 id="dossierTitle">Macajalar Bay Marine Sanctuary</h2>
             <p class="dossier-subhead" id="dossierSubhead">Cagayan de Oro Coastal Reach &bull; Misamis Oriental &bull; 8°30'N 124°40'E</p>
           </div>
