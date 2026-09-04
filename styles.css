@@ -1,30 +1,33 @@
-/* Archipelago Marine Cadence — Oceanographic Cartography & Data UI */
+/* Archipelago Marine Cadence - Oceanographic Cartography & Telemetry UI */
+/* Character Encoding: 100% 7-Bit ASCII - Clean Typography & Technical Design */
 
 :root {
-  --bg-deep: #05090f;
-  --bg-surface: #0a111c;
-  --bg-panel: #0d1624;
-  --bg-card: rgba(16, 26, 42, 0.85);
+  --bg-deep: #03070d;
+  --bg-surface: #070e18;
+  --bg-panel: #0b1524;
+  --bg-card: rgba(14, 25, 41, 0.85);
 
-  --border-ocean: rgba(0, 242, 254, 0.18);
+  --border-ocean: rgba(0, 242, 254, 0.2);
   --border-subtle: rgba(255, 255, 255, 0.08);
 
   --text-pure: #ffffff;
   --text-main: #e2e8f0;
-  --text-muted: #8494a7;
+  --text-muted: #8294a8;
 
   --cyan-bright: #00f2fe;
-  --cyan-glow: rgba(0, 242, 254, 0.35);
+  --cyan-glow: rgba(0, 242, 254, 0.3);
   --emerald-bio: #38ef7d;
   --coral-warm: #ff7675;
   --amber-alert: #f59e0b;
+  --red-critical: #ef4444;
+  --purple-trench: #a855f7;
 
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 18px;
+  --radius-lg: 16px;
 }
 
 * {
@@ -46,9 +49,9 @@ body {
 
 /* Header */
 .ocean-header {
-  background: rgba(5, 9, 15, 0.98);
+  background: rgba(4, 8, 14, 0.98);
   border-bottom: 1px solid var(--border-ocean);
-  padding: 12px 28px;
+  padding: 10px 24px;
   z-index: 50;
   flex-shrink: 0;
 }
@@ -62,38 +65,19 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
-.sonar-indicator {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sonar-core {
-  width: 8px;
-  height: 8px;
-  background: var(--cyan-bright);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--cyan-bright);
-}
-
-.sonar-ping {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 1.5px solid var(--cyan-bright);
-  animation: pingSonar 2s infinite cubic-bezier(0, 0.2, 0.8, 1);
-}
-
-@keyframes pingSonar {
-  0% { transform: scale(0.6); opacity: 1; }
-  100% { transform: scale(2.2); opacity: 0; }
+.brand-tech-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--cyan-bright);
+  border: 1px solid rgba(0, 242, 254, 0.28);
+  letter-spacing: 0.08em;
 }
 
 .brand-text {
@@ -103,8 +87,8 @@ body {
 
 .brand-kicker {
   font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  letter-spacing: 0.14em;
   font-weight: 600;
   color: var(--cyan-bright);
 }
@@ -112,18 +96,18 @@ body {
 .brand-title {
   font-size: 15px;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--text-pure);
 }
 
 .telemetry-bar {
   display: flex;
   align-items: center;
-  gap: 20px;
-  background: rgba(0, 242, 254, 0.05);
+  gap: 18px;
+  background: rgba(0, 242, 254, 0.04);
   border: 1px solid var(--border-ocean);
-  padding: 6px 18px;
-  border-radius: 30px;
+  padding: 6px 16px;
+  border-radius: 24px;
 }
 
 .tele-item {
@@ -133,49 +117,51 @@ body {
 
 .tele-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 8.5px;
   text-transform: uppercase;
   color: var(--text-muted);
+  letter-spacing: 0.06em;
 }
 
 .tele-val {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
 }
 
 .tele-divider {
   width: 1px;
-  height: 20px;
+  height: 18px;
   background: var(--border-subtle);
 }
 
 .text-cyan { color: var(--cyan-bright); }
 .text-emerald { color: var(--emerald-bio); }
+.text-amber { color: var(--amber-alert); }
 
 /* Main Split Viewport */
 .atlas-shell {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 490px;
-  height: calc(100vh - 58px);
+  grid-template-columns: 1fr 500px;
+  height: calc(100vh - 56px);
   overflow: hidden;
 }
 
-/* Left: Map Viewport */
+/* Left: Map & Depth Profiler Column */
 .map-viewport-container {
   display: flex;
   flex-direction: column;
   position: relative;
-  background: #04070b;
+  background: #020509;
   overflow: hidden;
   height: 100%;
 }
 
-/* Taxon Carousel - Fixed clipping and styling */
+/* Sanctuary Carousel */
 .species-carousel {
-  padding: 12px 20px;
-  background: rgba(10, 17, 28, 0.95);
+  padding: 10px 18px;
+  background: rgba(7, 14, 24, 0.95);
   border-bottom: 1px solid var(--border-subtle);
   overflow-x: auto;
   white-space: nowrap;
@@ -186,7 +172,7 @@ body {
 }
 
 .species-carousel::-webkit-scrollbar {
-  height: 4px;
+  height: 3px;
 }
 
 .species-carousel::-webkit-scrollbar-thumb {
@@ -196,17 +182,17 @@ body {
 
 .carousel-track {
   display: inline-flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .taxon-chip {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-subtle);
   color: #94a3b8;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 7px 14px;
+  border-radius: 18px;
+  font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -222,20 +208,21 @@ body {
 
 .taxon-chip.active {
   background: var(--cyan-bright);
-  color: #03080e;
+  color: #02070e;
   border-color: var(--cyan-bright);
-  box-shadow: 0 0 14px var(--cyan-glow);
+  box-shadow: 0 0 12px var(--cyan-glow);
   font-weight: 700;
 }
 
-/* Map SVG Stage */
+/* Map & Stage Layout */
 .map-stage {
-  flex: 1;
+  flex: 1.1;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  min-height: 320px;
 }
 
 .archipelago-svg {
@@ -246,14 +233,14 @@ body {
 }
 
 .island-landmass {
-  fill: #132238;
-  stroke: #223c5e;
-  stroke-width: 1.5;
+  fill: #112035;
+  stroke: #1e3654;
+  stroke-width: 1.4;
   transition: fill 0.3s;
 }
 
 .island-landmass:hover {
-  fill: #1a3254;
+  fill: #182e4a;
 }
 
 .province-label {
@@ -265,32 +252,34 @@ body {
   pointer-events: none;
 }
 
-/* Ocean Current animations */
+/* Current Vector Lines */
 .current-flow {
-  animation: currentDash 24s linear infinite;
+  animation: currentDash 20s linear infinite;
   opacity: 0.65;
 }
 
 @keyframes currentDash {
-  to { stroke-dashoffset: -200; }
+  to { stroke-dashoffset: -240; }
 }
 
-/* Interactive Marine Nodes */
+/* Reticle Marine Nodes (Clean technical design, no pulse beacons) */
 .marine-node {
   cursor: pointer;
 }
 
-.sonar-beacon {
+.reticle-outer {
   fill: none;
-  stroke: var(--cyan-bright);
-  stroke-width: 1.5;
-  opacity: 0.3;
-  animation: pulseBeacon 2.5s infinite ease-out;
+  stroke: rgba(0, 242, 254, 0.35);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+  transition: all 0.25s ease;
 }
 
-@keyframes pulseBeacon {
-  0% { transform: scale(0.6); opacity: 0.8; }
-  100% { transform: scale(1.6); opacity: 0; }
+.marine-node:hover .reticle-outer, .marine-node.active .reticle-outer {
+  stroke: var(--cyan-bright);
+  stroke-width: 1.8;
+  stroke-dasharray: none;
+  r: 16;
 }
 
 .core-point {
@@ -298,31 +287,31 @@ body {
 }
 
 .point-coral { fill: var(--coral-warm); }
-.point-cdo { fill: var(--cyan-bright); filter: drop-shadow(0 0 8px var(--cyan-bright)); }
+.point-cdo { fill: var(--cyan-bright); filter: drop-shadow(0 0 6px var(--cyan-bright)); }
 .point-pelagic { fill: var(--emerald-bio); }
-.point-trench { fill: #c084fc; }
+.point-trench { fill: var(--purple-trench); }
 
 .marine-node:hover .core-point, .marine-node.active .core-point {
-  r: 9;
+  r: 8;
 }
 
-/* Node Badges & Non-overlapping Callouts */
+/* Node Badges */
 .node-bubble {
-  fill: rgba(7, 14, 24, 0.88);
-  stroke: rgba(0, 242, 254, 0.25);
+  fill: rgba(6, 12, 20, 0.9);
+  stroke: rgba(0, 242, 254, 0.3);
   stroke-width: 1;
   rx: 4;
   transition: all 0.2s;
 }
 
 .marine-node:hover .node-bubble, .marine-node.active .node-bubble {
-  fill: rgba(0, 242, 254, 0.15);
+  fill: rgba(0, 242, 254, 0.16);
   stroke: var(--cyan-bright);
 }
 
 .node-caption {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   fill: #cbd5e1;
   pointer-events: none;
@@ -338,55 +327,146 @@ body {
   font-weight: 800 !important;
 }
 
-/* HUD Overlay */
+/* Floating Technical HUD (Clean technical datums) */
 .map-hud-overlay {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 12px;
+  left: 14px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   z-index: 15;
 }
 
-.hud-pill {
-  background: rgba(10, 17, 28, 0.9);
+.hud-datum {
+  background: rgba(7, 14, 24, 0.92);
   border: 1px solid var(--border-ocean);
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--text-muted);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-.hud-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--emerald-bio);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--emerald-bio);
+.hud-datum strong {
+  color: var(--cyan-bright);
+  font-weight: 600;
 }
 
 .hud-btn {
-  background: rgba(10, 17, 28, 0.9);
+  background: rgba(7, 14, 24, 0.92);
   border: 1px solid var(--border-subtle);
   color: var(--text-main);
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: var(--font-mono);
 }
 
 .hud-btn:hover {
-  background: rgba(0, 242, 254, 0.1);
+  background: rgba(0, 242, 254, 0.12);
+  color: var(--cyan-bright);
+  border-color: var(--border-ocean);
+}
+
+/* ================================================= */
+/* BOTTOM BATHYMETRIC TRANSECT PROFILER (SYSTEM A)  */
+/* ================================================= */
+.bathymetric-panel {
+  flex: 0.9;
+  background: rgba(5, 11, 19, 0.97);
+  border-top: 1px solid var(--border-ocean);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 18px 10px;
+  overflow: hidden;
+  position: relative;
+  min-height: 210px;
+}
+
+.bathy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bathy-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bathy-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--cyan-bright);
 }
 
-/* Right: Sanctuary Dossier */
+.bathy-spec {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.bathy-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 9.5px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 4px;
+}
+
+.bathy-stage-wrap {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 140px;
+}
+
+#bathyCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.bathy-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(5, 12, 22, 0.95);
+  border: 1px solid var(--cyan-bright);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-pure);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 30;
+  transform: translate(-50%, -115%);
+  white-space: nowrap;
+}
+
+/* ================================================= */
+/* RIGHT OCEANOGRAPHIC DOSSIER PANEL                */
+/* ================================================= */
 .sanctuary-dossier {
   background: var(--bg-surface);
   border-left: 1px solid var(--border-ocean);
@@ -397,11 +477,20 @@ body {
   height: 100%;
 }
 
+.sanctuary-dossier::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sanctuary-dossier::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 254, 0.25);
+  border-radius: 3px;
+}
+
 .dossier-scroll {
-  padding: 28px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .dossier-header {
@@ -409,44 +498,45 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 .badge-status {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--cyan-bright);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .dossier-meta h2 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1.25;
   color: var(--text-pure);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .dossier-subhead {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
 }
 
 .health-index-badge {
-  background: rgba(0, 242, 254, 0.08);
+  background: rgba(0, 242, 254, 0.06);
   border: 1px solid var(--border-ocean);
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: var(--radius-md);
   text-align: center;
-  min-width: 95px;
+  min-width: 90px;
+  flex-shrink: 0;
 }
 
 .index-num {
   font-family: var(--font-mono);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--cyan-bright);
   display: block;
@@ -454,31 +544,32 @@ body {
 }
 
 .index-lbl {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 3px;
   display: block;
+  letter-spacing: 0.05em;
 }
 
-/* Dossier Grid Metrics */
+/* Metric Cards */
 .dossier-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .dossier-metric {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
 }
 
 .m-val {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-pure);
   display: block;
@@ -486,19 +577,21 @@ body {
 }
 
 .m-lbl {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--text-muted);
 }
 
-/* Thermal Simulator */
+/* ================================================= */
+/* NOAA DEGREE HEATING WEEKS & THERMAL ENGINE       */
+/* ================================================= */
 .thermal-simulator-card {
-  background: rgba(0, 242, 254, 0.03);
+  background: rgba(0, 242, 254, 0.025);
   border: 1px solid var(--border-ocean);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .sim-header {
@@ -508,8 +601,11 @@ body {
 }
 
 .sim-header h4 {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-pure);
 }
 
 .sim-pill {
@@ -520,18 +616,41 @@ body {
   border-radius: 12px;
   background: rgba(56, 239, 125, 0.15);
   color: var(--emerald-bio);
+  border: 1px solid rgba(56, 239, 125, 0.3);
 }
 
 .sim-desc {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
   line-height: 1.45;
+}
+
+.sim-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.control-label-row span {
+  color: var(--text-muted);
+}
+
+.control-label-row strong {
+  font-family: var(--font-mono);
+  color: var(--cyan-bright);
 }
 
 .slider-row {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 input[type=range] {
@@ -545,21 +664,70 @@ input[type=range] {
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: var(--cyan-bright);
   cursor: pointer;
-  box-shadow: 0 0 10px var(--cyan-bright);
+  box-shadow: 0 0 8px var(--cyan-bright);
 }
 
-.slider-val {
+.duration-selector {
+  display: flex;
+  gap: 6px;
+}
+
+.dur-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 10.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dur-btn:hover {
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--text-pure);
+}
+
+.dur-btn.active {
+  background: rgba(0, 242, 254, 0.2);
+  border-color: var(--cyan-bright);
   color: var(--cyan-bright);
-  min-width: 90px;
-  text-align: right;
+  font-weight: 700;
+}
+
+.dhw-meter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(4, 9, 16, 0.6);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.dhw-meter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.dhw-stat {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--cyan-bright);
+}
+
+.dhw-sub {
+  font-size: 10px;
+  color: var(--text-muted);
 }
 
 .stress-meter-bar {
@@ -571,29 +739,84 @@ input[type=range]::-webkit-slider-thumb {
 
 .stress-fill {
   height: 100%;
-  transition: width 0.25s, background-color 0.25s;
+  transition: width 0.25s ease, background-color 0.25s ease;
 }
 
 .stress-readout {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ================================================= */
+/* HYDRODYNAMIC TIDAL & VECTOR ENGINE (SYSTEM C)    */
+/* ================================================= */
+.hydro-simulator-card {
+  background: rgba(56, 239, 125, 0.025);
+  border: 1px solid rgba(56, 239, 125, 0.2);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hydro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hydro-header h4 {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-pure);
+}
+
+.hydro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.hydro-item {
+  background: rgba(4, 9, 16, 0.6);
+  border: 1px solid var(--border-subtle);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.hydro-val {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--emerald-bio);
+}
+
+.hydro-lbl {
+  font-size: 9.5px;
   color: var(--text-muted);
 }
 
 /* Species Catalog */
 .species-catalog h4 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--cyan-bright);
 }
 
 .species-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .species-item {
@@ -602,29 +825,31 @@ input[type=range]::-webkit-slider-thumb {
   gap: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  padding: 10px 14px;
+  padding: 9px 12px;
   border-radius: var(--radius-sm);
 }
 
-.species-symbol {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+.species-badge-type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 4px;
   background: rgba(0, 242, 254, 0.1);
   color: var(--cyan-bright);
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  min-width: 58px;
+  text-align: center;
 }
 
 .species-details h5 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
+  color: var(--text-pure);
 }
 
 .species-details span {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--text-muted);
   font-style: italic;
 }
@@ -633,34 +858,70 @@ input[type=range]::-webkit-slider-thumb {
 .conservation-box {
   background: rgba(255, 255, 255, 0.02);
   border-left: 3px solid var(--emerald-bio);
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .conservation-box h5 {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   color: var(--emerald-bio);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .conservation-box p {
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 11.5px;
+  line-height: 1.5;
   color: var(--text-muted);
 }
 
+/* Telemetry Export Button */
+.export-section {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn-export {
+  flex: 1;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid var(--border-ocean);
+  color: var(--cyan-bright);
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-export:hover {
+  background: var(--cyan-bright);
+  color: #02070e;
+}
+
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .atlas-shell {
     grid-template-columns: 1fr;
     height: auto;
     overflow-y: auto;
   }
   .map-viewport-container {
-    height: 520px;
+    height: auto;
+  }
+  .map-stage {
+    height: 400px;
+  }
+  .bathymetric-panel {
+    height: 220px;
   }
   .sanctuary-dossier {
     height: auto;
